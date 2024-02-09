@@ -34,8 +34,7 @@ const Main = ({
   handleNextButton,
   handlePrevButton,
 }: Props) => {
-  
-const [active,setActive] =useState(false)
+  const [active, setActive] = useState(false);
   return (
     <>
       {products.map((product: any, index: number) => (
@@ -44,7 +43,10 @@ const [active,setActive] =useState(false)
             key={product.id}
             className="flex w-lg mx-auto justify-between items-center my-10  md:flex-col md:gap-10"
           >
-            <div key={product.id} className="flex flex-col w-half md:w-full gap-4    ">
+            <div
+              key={product.id}
+              className="flex flex-col w-half md:w-full gap-4    "
+            >
               {images.map((img: any) => (
                 <>
                   <div
@@ -128,14 +130,24 @@ const [active,setActive] =useState(false)
                     +
                   </button>
                 </div>
-               
 
                 <button
-                  onClick={() =>{ onQuantityChange(index, "addToCart"); setActive(true)}}
-                  className={`flex bg-orange text-xs font-bold w-md md:w-full justify-center items-center p-3 gap-3 rounded-xl cursor-pointer ${active === true? "bg-pale text-orange" : ""}`}
+                  onClick={() => {
+                    onQuantityChange(index, "addToCart");
+                    setActive(true);
+                  }}
+                  className={`flex bg-orange text-xs font-bold w-md md:w-full justify-center items-center p-3 gap-3 rounded-xl cursor-pointer ${
+                    active === true && product.quantity > 0
+                      ? "bg-pale text-orange"
+                      : ""
+                  }`}
                 >
                   <img src="./images/icon-cart.svg" alt="" />
-                  <p> Add to cart</p>
+                  {active === true && product.quantity > 0  ? (
+                    <p> Added to cart</p>
+                  ) : (
+                    <p> Add to cart</p>
+                  )}
                 </button>
               </div>
             </div>
@@ -144,55 +156,53 @@ const [active,setActive] =useState(false)
       ))}
       {selectedImage && (
         <>
-          {products.map((product: any,  ) => (
-            <div className="fixed top-0 left-0 w-full  h-full   bg-black bg-opacity-50 z-40 flex justify-center items-center ">
-              <div className="flex flex-col gap-4  w-96 sm:w-60  mx-auto    ">
-                {images.map((img: any) => (
-                  <>
-                    <div
-                      key={img.id}
-                      className={`flex     ${
-                        img.id - 1 === currentImage
-                          ? " z-10 opacity-100 transition-opacity ease-in block  delay-75 "
-                          : "absolute left-0 right-0 m-auto  w-0 z-0 opacity-0 transition-opacity ease-out"
-                      }   `}
-                    >
-                      <div className="flex    items-center  relative justify-center">
-                        <div
-                          onClick={closeLightbox}
-                          className={`rounded-full   w-5 p-3 flex items-center justify-center absolute -top-8 right-0 cursor-pointer z-50
+          <div className="fixed top-0 left-0 w-full  h-full   bg-black bg-opacity-50 z-40 flex justify-center items-center ">
+            <div className="flex flex-col gap-4  w-96 sm:w-60  mx-auto    ">
+              {images.map((img: any) => (
+                <>
+                  <div
+                    key={img.id}
+                    className={`flex     ${
+                      img.id - 1 === currentImage
+                        ? " z-10 opacity-100 transition-opacity ease-in block  delay-75 "
+                        : "absolute left-0 right-0 m-auto  w-0 z-0 opacity-0 transition-opacity ease-out"
+                    }   `}
+                  >
+                    <div className="flex    items-center  relative justify-center">
+                      <div
+                        onClick={closeLightbox}
+                        className={`rounded-full   w-5 p-3 flex items-center justify-center absolute -top-8 right-0 cursor-pointer z-50
                       h-3   hover:text-orange bg-pale  ${
                         img.id - 1 !== currentImage ? "hidden" : "block"
                       }`}
-                        >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </div>
-                        <div
-                          onClick={handlePrevButton}
-                          className={`rounded-full w-5 p-3 flex items-center justify-center absolute -left-3 cursor-pointer
+                      >
+                        <FontAwesomeIcon icon={faTimes} />
+                      </div>
+                      <div
+                        onClick={handlePrevButton}
+                        className={`rounded-full w-5 p-3 flex items-center justify-center absolute -left-3 cursor-pointer
                       h-3   bg-pale hover:text-orange ${
                         img.id - 1 !== currentImage ? "hidden" : "block"
                       }`}
-                        >
-                          <FontAwesomeIcon icon={faAngleLeft} />
-                        </div>
-                        <img className="    rounded-2xl" src={img.img} alt="" />
-                        <div
-                          onClick={handleNextButton}
-                          className={`rounded-full w-5 p-3 flex items-center justify-center absolute -right-3 cursor-pointer
+                      >
+                        <FontAwesomeIcon icon={faAngleLeft} />
+                      </div>
+                      <img className="    rounded-2xl" src={img.img} alt="" />
+                      <div
+                        onClick={handleNextButton}
+                        className={`rounded-full w-5 p-3 flex items-center justify-center absolute -right-3 cursor-pointer
                       h-3   bg-pale hover:text-orange ${
                         img.id - 1 !== currentImage ? "hidden" : "block"
                       }`}
-                        >
-                          <FontAwesomeIcon icon={faAngleRight} />
-                        </div>
+                      >
+                        <FontAwesomeIcon icon={faAngleRight} />
                       </div>
                     </div>
-                  </>
-                ))}
-              </div>
+                  </div>
+                </>
+              ))}
             </div>
-          ))}
+          </div>
         </>
       )}
     </>
