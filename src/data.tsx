@@ -19,8 +19,8 @@ export const product = [
 ];
 
 export const images = [
-  { id: 1, img: "/images/image-product-1.jpg" },
-  { id: 2, img: "/images/image-product-2.jpg" },
-  { id: 3, img: "/images/image-product-3.jpg" },
-  { id: 4, img: "/images/image-product-4.jpg" },
+  { id: 1, img: "images/image-product-1.jpg" },
+  { id: 2, img: "images/image-product-2.jpg" },
+  { id: 3, img: "images/image-product-3.jpg" },
+  { id: 4, img: "images/image-product-4.jpg" },
 ];
