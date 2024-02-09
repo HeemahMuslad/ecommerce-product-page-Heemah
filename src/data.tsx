@@ -1,11 +1,7 @@
 export const product = [
   {
     id: 1,
-    image: "/images/image-product-1.jpg",
-    side1: "/images/image-product-1-thumbnail.jpg",
-    side2: "/images/image-product-2-thumbnail.jpg",
-    side3: "/images/image-product-3-thumbnail.jpg",
-    side4: "/images/image-product-4-thumbnail.jpg",
+    image: "images/image-product-1.jpg",
     title: "  Fall Limited Edition Sneakers",
     price: 125.0,
     description:
@@ -15,7 +11,6 @@ export const product = [
     prevPrice: 250.0,
     quantity: 0,
   },
-
 ];
 
 export const images = [
