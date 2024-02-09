@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -34,6 +34,8 @@ const Main = ({
   handleNextButton,
   handlePrevButton,
 }: Props) => {
+  
+const [active,setActive] =useState(false)
   return (
     <>
       {products.map((product: any, index: number) => (
@@ -112,27 +114,29 @@ const Main = ({
               </p>
               <div className="flex gap-2 lg:flex-col">
                 <div className="flex w-half justify-between bg-gray py-2 rounded-xl">
-                  <p
+                  <button
                     onClick={() => onQuantityChange(index, "decrement")}
-                    className="font-bold text-orange cursor-pointer px-3 hover:bg-pale"
+                    className="rounded font-bold text-orange cursor-pointer px-3 hover:bg-pale"
                   >
                     -
-                  </p>
+                  </button>
                   <p className="font-bold">{product.quantity}</p>
-                  <p
+                  <button
                     onClick={() => onQuantityChange(index, "increment")}
-                    className="font-bold text-orange cursor-pointer px-3 hover:bg-pale "
+                    className="font-bold rounded text-orange cursor-pointer px-3 hover:bg-pale "
                   >
                     +
-                  </p>
+                  </button>
                 </div>
-                <div
-                  onClick={() => onQuantityChange(index, "addToCart")}
-                  className="flex bg-orange text-white text-xs font-bold w-md md:w-full justify-center items-center p-3 gap-3 rounded-xl cursor-pointer hover:bg-pale hover:text-orange"
+               
+
+                <button
+                  onClick={() =>{ onQuantityChange(index, "addToCart"); setActive(true)}}
+                  className={`flex bg-orange text-xs font-bold w-md md:w-full justify-center items-center p-3 gap-3 rounded-xl cursor-pointer ${active === true? "bg-pale text-orange" : ""}`}
                 >
-                  <img src="./images/icon-cart.svg" alt="" />{" "}
+                  <img src="./images/icon-cart.svg" alt="" />
                   <p> Add to cart</p>
-                </div>
+                </button>
               </div>
             </div>
           </div>
@@ -140,14 +144,14 @@ const Main = ({
       ))}
       {selectedImage && (
         <>
-          {products.map((product: any, ) => (
-            <div className="fixed top-0 left-0 w-full  h-full px-20 lg:px-0  bg-black bg-opacity-50 z-40 flex justify-center items-center ">
-              <div className="flex flex-col gap-4  w-half mx-auto    ">
+          {products.map((product: any,  ) => (
+            <div className="fixed top-0 left-0 w-full  h-full   bg-black bg-opacity-50 z-40 flex justify-center items-center ">
+              <div className="flex flex-col gap-4  w-96 sm:w-60  mx-auto    ">
                 {images.map((img: any) => (
                   <>
                     <div
                       key={img.id}
-                      className={`flex    ${
+                      className={`flex     ${
                         img.id - 1 === currentImage
                           ? " z-10 opacity-100 transition-opacity ease-in block  delay-75 "
                           : "absolute left-0 right-0 m-auto  w-0 z-0 opacity-0 transition-opacity ease-out"
@@ -186,34 +190,6 @@ const Main = ({
                     </div>
                   </>
                 ))}
-                <div className="flex justify-between w-xlg mx-auto">
-                  {images.map((img: any, index: number) => (
-                    <>
-                      <img
-                        key={img.id}
-                        onClick={() => {
-                          if (product.id === selectedProduct) {
-                            setCurrentImage(index);
-                            openLightbox();
-                          }
-                          setSelectedProduct(product.id);
-                        }}
-                        className={
-                          product.id === selectedProduct
-                            ? `  ${
-                                index === currentImage
-                                  ? "border-2 border-orange opacity-50 "
-                                  : ""
-                              }   rounded w-sm h-sm  hover:opacity-50 cursor-pointer`
-                            : `    rounded w-sm h-sm  hover:opacity-50 cursor-pointer`
-                        }
-                        src={img.img}
-                        alt=""
-                      />
-                    </>
-                  ))}
-                 
-                </div>
               </div>
             </div>
           ))}

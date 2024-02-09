@@ -54,8 +54,8 @@ const App = () => {
   const closeLightbox = () => {
     setSelectedImage(false);
   };
-  const onOpenCart = () => {
-    setOpenCart(true);
+  const onToggleCart = () => {
+    setOpenCart(!openCart);
   };
   const onCloseCart = () => {
     setOpenCart(false);
@@ -64,7 +64,7 @@ const App = () => {
     <>
       <Header
         openCart={openCart}
-        onOpenCart={onOpenCart}
+        onToggleCart={onToggleCart}
         onCloseCart={onCloseCart}
         products={product}
         removeProduct={removeProduct}

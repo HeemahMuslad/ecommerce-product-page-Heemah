@@ -4,7 +4,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 interface Props {
   products: any[];
   openCart: boolean;
-  onOpenCart: () => void;
+  onToggleCart: () => void;
   onCloseCart: () => void;
   removeProduct: (productId: number) => void;
   toggleMenu: () => void;
@@ -13,7 +13,7 @@ interface Props {
 }
 const Header = ({
   openCart,
-  onOpenCart,
+  onToggleCart,
   products,
   onCloseCart,
   removeProduct,
@@ -45,35 +45,35 @@ const Header = ({
           <img className="" src="./images/logo.svg" alt="" />
         </div>
         <div className={`w-md navLinks ${isActive ? "active" : ""} `}>
-          <ul className="flex gap-5 text-dark">
-            <li onClick={closeMenu} className="link">
+          <ul className="flex gap-5 text-dark ">
+            <li
+              onClick={closeMenu}
+              className="link hover:text-orange transition delay-150 ease-in-out"
+            >
               <a href="#">Collections</a>
             </li>
-            <li onClick={closeMenu} className="link">
+            <li onClick={closeMenu} className="link hover:text-orange">
               <a href="#">Men</a>
             </li>
-            <li onClick={closeMenu} className="link">
+            <li onClick={closeMenu} className="link hover:text-orange">
               <a href="#">Women</a>
             </li>
-            <li onClick={closeMenu} className="link">
+            <li onClick={closeMenu} className="link hover:text-orange">
               <a href="#">About</a>
             </li>
-            <li onClick={closeMenu} className="link">
+            <li onClick={closeMenu} className="link hover:text-orange">
               <a href="#">Contact</a>
             </li>
           </ul>
         </div>
         <div className="flex  items-center justify-between w-sm lg:w-md lg:justify-end gap-10">
           <div className="flex items-center relative  ">
-            <img
-              onClick={onOpenCart}
-              className="cursor-pointer w-7 "
-              src="./images/icon-cart.svg"
-              alt=""
-            />
+            <button onClick={onToggleCart} className="cursor-pointer w-7 ">
+              <img src="./images/icon-cart.svg" alt="" />
+            </button>
 
             {
-              <p className=" flex items-center justify-center  text-white rounded-full w-10 bg-orange absolute -top-4 -right-7">
+              <p className=" flex items-center justify-center  text-white rounded-full px-3 bg-orange absolute -top-4 -right-5">
                 {totalProducts}
               </p>
             }
@@ -123,19 +123,19 @@ const Header = ({
                         <p>${product.price * product.quantity}.00</p>
                       </div>
                     </div>
-                    <div
+                    <button
                       onClick={() => {
                         product.quantity = 0;
                         removeProduct(product.id);
                       }}
-                      className="cursor-pointer"
+                      className="cursor-pointer hover:bg-dark p-1 rounded transition delay-150 ease-in-out"
                     >
                       <img src="./images/icon-delete.svg" alt="" />
-                    </div>
+                    </button>
                   </div>
-                  <div className="flex bg-orange text-white text-xs font-bold w-full justify-center items-center p-3 gap-3 rounded-xl cursor-pointer hover:bg-dark hover:text-orange">
-                    <a href="#">Checkout</a>{" "}
-                  </div>
+                  <button className="flex bg-orange text-white text-xs font-bold w-full justify-center items-center p-3 gap-3 rounded-xl cursor-pointer hover:bg-dark hover:text-orange transition delay-150 ease-in-out">
+                    <a href="#">Checkout</a>
+                  </button>
                 </div>
               </>
             ))}
